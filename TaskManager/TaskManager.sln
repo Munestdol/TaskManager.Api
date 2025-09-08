@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Api", "src\TaskManager.Api\TaskManager.Api.csproj", "{DD4EEC7E-1B42-4DEE-8759-DFF3C7585EAF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7FA5E734-AA5E-4C9C-9DED-30110C5F8DD4} = {7FA5E734-AA5E-4C9C-9DED-30110C5F8DD4}
+		{86F97B45-98F9-4FF4-D142-01F3AF77EEBE} = {86F97B45-98F9-4FF4-D142-01F3AF77EEBE}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Application", "src\TaskManager.Application\TaskManager.Application.csproj", "{7FA5E734-AA5E-4C9C-9DED-30110C5F8DD4}"

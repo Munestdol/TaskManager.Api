@@ -27,11 +27,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var mapsterConfig = new TypeAdapterConfig();
-mapsterConfig.Scan(AppDomain.CurrentDomain.GetAssemblies());
+mapsterConfig.RegisterMappings();
 builder.Services.AddSingleton(mapsterConfig);
 builder.Services.AddScoped<IMapper, ServiceMapper>();
 
-builder.Services.RegisterMappings();
 builder.Services.AddSingleton<IMapper, ServiceMapper>();
 
 var app = builder.Build();

@@ -10,7 +10,7 @@
         public DateTime? DueDateUtc { get; private set; }
         public Guid? AssigneeId { get; private set; }
 
-        private TaskItem() { }
+        protected TaskItem() { }
 
         public TaskItem(string title, string? description = null, DateTime? dueDateUtc = null)
         {

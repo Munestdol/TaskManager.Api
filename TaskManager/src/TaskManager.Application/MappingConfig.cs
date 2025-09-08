@@ -7,11 +7,14 @@ namespace TaskManager.Application
 {
     public static class MappingConfig
     {
-        public static void RegisterMappings(this IServiceCollection services)
+        public static void RegisterMappings(this TypeAdapterConfig config)
         {
-            TypeAdapterConfig<TaskItem, TaskDto>.NewConfig();
-            TypeAdapterConfig<CreateTaskDto, TaskItem>.NewConfig();
-            TypeAdapterConfig<UpdateTaskDto, TaskItem>.NewConfig();
+            config.NewConfig<TaskItem, TaskDto>();
+
+            config.NewConfig<CreateTaskDto, TaskItem>()
+                  .ConstructUsing(src => new TaskItem(src.Title, src.Description, src.DueDateUtc));
+
+            config.NewConfig<UpdateTaskDto, TaskItem>();
         }
     }
 }

@@ -16,9 +16,10 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day));
 
 builder.Services.AddControllers();
-builder.Services.AddValidatorsFromAssemblyContaining<CreateTaskDtoValidator>();
-builder.Services.AddFluentValidationAutoValidation()
-                .AddFluentValidationClientsideAdapters();
+builder.Services
+    .AddValidatorsFromAssemblyContaining<CreateTaskDtoValidator>()
+    .AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

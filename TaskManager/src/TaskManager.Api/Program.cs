@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Mapster;
 using MapsterMapper;
 using Serilog;
 using TaskManager.Api.Middleware;
@@ -24,6 +25,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(builder.Configuration);
+
+var mapsterConfig = new TypeAdapterConfig();
+mapsterConfig.Scan(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddSingleton(mapsterConfig);
+builder.Services.AddScoped<IMapper, ServiceMapper>();
 
 builder.Services.RegisterMappings();
 builder.Services.AddSingleton<IMapper, ServiceMapper>();

@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TaskManager.Api.Models;
 using TaskManager.Application.Tasks.DTOs;
 using TaskManager.Domain.Entities;
@@ -77,6 +78,19 @@ namespace TaskManager.Api.Controllers
 
             await _repo.DeleteAsync(existing, ct);
             return Ok(ApiResponse<string>.Success("Task deleted", traceId: HttpContext.TraceIdentifier));
+        }
+
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateTaskStatusDto dto, CancellationToken ct)
+        {
+            var existing = await _repo.GetByIdAsync(id, ct);
+            if (existing == null)
+                return NotFound(ApiResponse<string>.Fail("Task not found", 404, HttpContext.TraceIdentifier));
+
+            existing.ChangeStatus((Domain.Enums.TaskStatus)dto.Status);
+
+            await _repo.UpdateAsync(existing, ct);
+            return Ok(ApiResponse<string>.Success("Task updated", traceId: HttpContext.TraceIdentifier));
         }
 
     }

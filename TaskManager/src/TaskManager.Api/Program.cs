@@ -39,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ValidationExceptionMiddleware>();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

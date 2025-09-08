@@ -1,6 +1,6 @@
 # TaskManager API
 
-**TaskManager API** is a learning-oriented but production‑ready REST API built with **.NET 9**, following Clean Architecture principles.  
+**TaskManager API** is a simple but production‑ready REST API built with **.NET 8**, following Clean Architecture principles.  
 It demonstrates best practices for building maintainable, scalable, and testable backend services.
 
 ---

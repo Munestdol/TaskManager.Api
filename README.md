@@ -28,7 +28,7 @@ src/
 ---
 
 ## 🛠 Tech Stack
-- **.NET 9**
+- **.NET 8**
 - **Entity Framework Core**
 - **PostgreSQL** (InMemory for tests)
 - **Serilog**

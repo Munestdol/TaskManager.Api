@@ -42,7 +42,7 @@ src/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/TaskManager.git
+git clone https://github.com/<your-username>/TaskManager.Api.git
 cd TaskManager
 ```
 

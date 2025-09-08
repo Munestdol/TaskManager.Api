@@ -1,5 +1,7 @@
 using Serilog;
 using TaskManager.Infrastructure;
+using MapsterMapper;
+using TaskManager.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.RegisterMappings();
+builder.Services.AddSingleton<IMapper, ServiceMapper>();
 
 var app = builder.Build();
 

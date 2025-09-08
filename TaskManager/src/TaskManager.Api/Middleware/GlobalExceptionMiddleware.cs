@@ -33,8 +33,11 @@ namespace TaskManager.Api.Middleware
                 {
                     StatusCode = context.Response.StatusCode,
                     Message = "Validation failed",
-                    Errors = errors
+                    Errors = errors,
+                    TraceId = context.TraceIdentifier,
+                    Timestamp = DateTime.UtcNow
                 }));
+
             }
             catch (Exception ex)
             {
@@ -46,7 +49,9 @@ namespace TaskManager.Api.Middleware
                 await context.Response.WriteAsync(JsonSerializer.Serialize(new
                 {
                     StatusCode = context.Response.StatusCode,
-                    Message = "An unexpected error occurred"
+                    Message = "An unexpected error occurred",
+                    TraceId = context.TraceIdentifier,
+                    Timestamp = DateTime.UtcNow
                 }));
             }
         }

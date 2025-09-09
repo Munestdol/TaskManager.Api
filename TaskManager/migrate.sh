@@ -11,7 +11,6 @@ dotnet ef database update \
   --startup-project src/TaskManager.Api/TaskManager.Api.csproj
 
 echo "===> Seeding test data..."
-# Подключаемся к Postgres и вставляем тестовые задачи
 PGPASSWORD=postgres psql -h db -U postgres -d task_manager <<EOF
 INSERT INTO "Tasks" ("Id", "Title", "Description", "Status", "CreatedAtUtc")
 VALUES

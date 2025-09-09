@@ -23,10 +23,12 @@ services:
       - db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    entrypoint: ["sh", "/src/migrate.sh"]
+    entrypoint: >
+      sh -c "apt-get update &&
+           apt-get install -y postgresql-client &&
+           sh /src/migrate.sh"
     networks:
       - app-net
-
 
   api:
     build:

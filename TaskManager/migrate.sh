@@ -13,11 +13,11 @@ dotnet ef database update \
 echo "===> Seeding test data..."
 # Подключаемся к Postgres и вставляем тестовые задачи
 PGPASSWORD=postgres psql -h db -U postgres -d task_manager <<EOF
-INSERT INTO "Tasks" ("Id", "Title", "Description", "Status", "CreatedAt")
+INSERT INTO "Tasks" ("Id", "Title", "Description", "Status", "CreatedAtUtc")
 VALUES
-  (gen_random_uuid(), 'Первая тестовая задача', 'Описание первой задачи', 'New', NOW()),
-  (gen_random_uuid(), 'Вторая тестовая задача', 'Описание второй задачи', 'InProgress', NOW()),
-  (gen_random_uuid(), 'Третья тестовая задача', 'Описание третьей задачи', 'Done', NOW())
+  (gen_random_uuid(), 'First test task', 'Discription for first task', 0, NOW()),
+  (gen_random_uuid(), 'Second test task', 'Discription for second task', 0, NOW()),
+  (gen_random_uuid(), 'Third test task', 'Discription for third task', 2, NOW())
 ON CONFLICT DO NOTHING;
 EOF
 

@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: task_manager
+    ports:
+      - "5432:5432"
+    networks:
+      - app-net
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  migrate:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    working_dir: /src
+    volumes:
+      - ./TaskManager:/src
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    entrypoint: ["sh", "/src/migrate.sh"]
+    networks:
+      - app-net
+
+
+  api:
+    build:
+      context: ./TaskManager
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=task_manager;Username=postgres;Password=postgres
+    depends_on:
+      - db
+      - migrate
+    networks:
+      - app-net
+
+networks:
+  app-net:
+
+volumes:
+  postgres-data:

@@ -51,11 +51,8 @@ app.UseSerilogRequestLogging();
 
 app.UseCors("AllowClient");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseMiddleware<ValidationExceptionMiddleware>();
 app.UseMiddleware<GlobalExceptionMiddleware>();

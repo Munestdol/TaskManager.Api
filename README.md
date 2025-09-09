@@ -58,4 +58,4 @@ cd TaskManager
 docker-compose up --build
 ```
 
-The API will be available at: https://localhost:5000/swagger
+The API will be available at: http://localhost:5000/swagger

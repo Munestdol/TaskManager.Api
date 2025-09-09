@@ -16,6 +16,18 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.Console()
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day));
 
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowClient", policy =>
+    {
+        policy.WithOrigins(allowedOrigins ?? Array.Empty<string>())
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 builder.Services
     .AddValidatorsFromAssemblyContaining<CreateTaskDtoValidator>()
@@ -37,11 +49,10 @@ var app = builder.Build();
 
 app.UseSerilogRequestLogging();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseCors("AllowClient");
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseMiddleware<ValidationExceptionMiddleware>();
 app.UseMiddleware<GlobalExceptionMiddleware>();

@@ -49,17 +49,13 @@ cd TaskManager
 ### 2. Configure the connection string in appsettings.json
 ```json
 "ConnectionStrings": {
-  "Default": "Host=localhost;Port=5432;Database=task_manager;Username=postgres;Password=postgres"
+  "Default": "Host=db;Port=5432;Database=task_manager;Username=postgres;Password=postgres"
 }
 ```
 
-### 3. Apply migrations
+### 3. Call docker-compose
 ```bash
-dotnet ef database update --project src/TaskManager.Infrastructure --startup-project src/TaskManager.Api
+docker-compose up --build
 ```
 
-### 4. Run the API
-```bash
-dotnet run --project src/TaskManager.Api
-```
-The API will be available at: https://localhost:5001/swagger
+The API will be available at: http://localhost:5000/swagger
